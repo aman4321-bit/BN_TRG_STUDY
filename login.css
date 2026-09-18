@@ -1,52 +1,5 @@
-/* ================= MOBILE RESPONSIVE ================= */
 
-@media (max-width: 768px) {
 
-    .login-page {
-        min-height: 100vh;
-        height: auto;
-        padding: 20px 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .login-left {
-        display: none;
-    }
-
-    .login-card {
-        width: 100%;
-        max-width: 420px;
-        margin: 0 auto;
-        padding: 25px 20px;
-        box-sizing: border-box;
-    }
-
-    .role-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .role-btn {
-        width: 100%;
-    }
-
-    .input-box {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .input-box input {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .login-btn {
-        width: 100%;
-    }
-}
 
 .login-page {
     min-height: 100vh;
@@ -285,3 +238,56 @@
     font-size: 11px;
     line-height: 1.7;
 }
+
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .login-page {
+        min-height: 100vh;
+        height: auto;
+        padding: 20px 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-left {
+        display: none;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+        padding: 25px 20px;
+        box-sizing: border-box;
+    }
+
+    .role-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .role-btn {
+        width: 100%;
+    }
+
+    .input-box {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .input-box input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .login-btn {
+        width: 100%;
+    }
+}
+
