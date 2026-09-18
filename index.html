@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BN TRG Cell | Training Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="mysql.js"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Login Page -->
+
+
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-left">
+        <div class="military-logo">
+            <div class="logo-star">
+               
+            </div>
+            <h2>BN TRG CELL</h2>
+            <p>Training Management System</p>
+        </div>
+
+        <div class="welcome-text">
+            <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">TRAIN • TRACK • APPROVE</h1>
+            <p>
+                Digital management system for efficient handling
+                of battalion training activities.
+            </p>
+        </div>
+    </div>
+
+    
+    <div class="login-card">
+        <div class="login-header">
+            <div class="shield">🛡️</div>
+            <h2>Secure Login</h2>
+            <p> Garhwal Rifle BN Training Cell Management System</p>
+        </div>
+
+        <div class="role-buttons">
+            <button class="role-btn active" onclick="selectRole('user')" id="userRole">
+                👤 Training JCO
+            </button>
+
+            <button class="role-btn" onclick="selectRole('admin')" id="adminRole">
+                🛡️ Training Officer
+            </button>
+            <button class="role-btn" id="studyRole" onclick="selectRole('study')">
+             📚 STUDY USER
+            </button>
+        </div>
+
+        <form onsubmit="login(event)">
+
+            <label>Username</label>
+            <div class="input-box">
+                <span>👤</span>
+                <input type="text" id="username" placeholder="Enter username" required>
+            </div>
+
+            <label>Password</label>
+            <div class="input-box">
+                <span>🔒</span>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit" class="login-btn">
+                LOGIN →
+            </button>
+
+        </form>
+
+        <p class="demo-text">
+            Demo User: <b>user / 1234</b><br>
+            Demo Admin: <b>admin / 1234</b>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ================= MAIN APPLICATION ================= -->
+
+<div id="appPage" class="app-page hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                
+            </div>
+            <div>
+                <h2>BN TRG CELL</h2>
+                <span>Training Management</span>
+            </div>
+        </div>
+
+        <div class="profile">
+
+            <div class="profile-avatar" id="profileAvatar">
+                U
+            </div>
+
+            <div>   
+                <strong id="profileName">Training JCO</strong>
+                <small id="profileRole">USER</small>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <button class="nav-btn active" onclick="showSection('dashboard', this)">
+                <span>📊</span> Dashboard
+            </button>
+
+            <button class="nav-btn user-only" onclick="showSection('entry', this)">
+                <span>📝</span> Jawan Entry
+            </button>
+
+            <button class="nav-btn" onclick="showSection('records', this)">
+                <span>📋</span> Training Records
+            </button>
+
+            <button class="nav-btn admin-only hidden" onclick="showSection('approvals', this)">
+                <span>✅</span> Approvals
+            </button>
+
+            <button class="nav-btn" onclick="showSection('material', this)">
+                <span>📚</span> Training Material
+            </button>
+
+            <button class="nav-btn" onclick="showSection('about', this)">
+                <span>ℹ️</span> About System
+            </button>
+
+        </nav>
+
+
+        <button class="logout-btn" onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <p class="small-title">BATTALION TRAINING CELL</p>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="top-right">
+
+                <div class="notification">
+                    🔔
+                    <span id="notificationCount">0</span>
+                </div>
+
+                <div class="date-box">
+                    📅 <span id="currentDate"></span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="content-section">
+
+            <div class="hero-banner">
+
+                <div>
+                    <p class="hero-small">WELCOME TO</p>
+
+                    <h2>
+                        BN TRAINING CELL
+                        <span>MANAGEMENT SYSTEM</span>
+                    </h2>
+
+                    <p>
+                        Manage training details, monitor progress
+                        and streamline approval of training records.
+                    </p>
+                </div>
+
+                <div class="hero-icon">
+                    🎖️
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats-grid">
+
+                        <!-- total str of jawan -->
+                <div class="stat-card blue">
+                    <div class="stat-icon">👥</div>
+                <div>
+                    <span>BN Strength</span>
+                    <h2 id="totalStrength">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card green">
+                    <div class="stat-icon">🟢</div>
+                <div>
+                    <span>BN Present Strength </span>
+                    <h2 id="presentStrength">0</h2>
+                </div>
+            </div>
+
+
+
+                <div class="stat-card blue">
+                    <div class="stat-icon">👥</div>
+                    <div>
+                        <span>Total Jawans</span>
+                        <h2 id="totalJawans">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-icon">⏳</div>
+                    <div>
+                        <span>Pending Approval</span>
+                        <h2 id="pendingCount">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-icon">✅</div>
+                    <div>
+                        <span>Approved</span>
+                        <h2 id="approvedCount">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card red">
+                    <div class="stat-icon">❌</div>
+                    <div>
+                        <span>Rejected</span>
+                        <h2 id="rejectedCount">0</h2>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTION -->
+
+            <div class="section-heading">
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Frequently used Training Cell functions</p>
+                </div>
+            </div>
+
+            <div class="quick-grid">
+
+                <button class="quick-card user-only" onclick="openEntry()">
+                    <div>📝</div>
+                    <h3>Add Jawan</h3>
+                    <p>Enter new training details</p>
+                </button>
+
+                <button class="quick-card" onclick="showSection('records')">
+                    <div>📋</div>
+                    <h3>View Records</h3>
+                    <p>Search training records</p>
+                </button>
+
+                <button class="quick-card admin-only hidden" onclick="showSection('approvals')">
+                    <div>✅</div>
+                    <h3>Verify Records</h3>
+                    <p>Approve or reject entries</p>
+                </button>
+
+                <button class="quick-card" onclick="showSection('material')">
+                    <div>📚</div>
+                    <h3>Study Material</h3>
+                    <p>Access training resources</p>
+                </button>
+
+            </div>
+
+
+            <!-- RECENT RECORDS -->
+
+            <div class="section-heading">
+                <div>
+                    <h2>Recent Training Records</h2>
+                    <p>Latest entries in the Training Cell</p>
+                </div>
+
+                <button class="view-btn" onclick="showSection('records')">
+                    View All →
+                </button>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Ser</th>
+                            <th>Service No</th>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= JAWAN ENTRY ================= -->
+
+        <section id="entry" class="content-section hidden">
+
+            <div class="form-card">
+
+                <div class="form-header">
+                    <div>
+                        <h2>Jawan Training Details</h2>
+                        <p>Enter complete details of personnel detailed for training.</p>
+                    </div>
+
+                    <span class="form-icon">📝</span>
+                </div>
+
+
+                <form id="jawanForm" onsubmit="addRecord(event)">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Service / Army Number *</label>
+                           <input
+                                type="text"
+                                id="serviceNo"
+                                placeholder="Enter Service / Army Number"
+                                required
+                                onblur="findJawan()">
+                            
+                        </div>
+
+                        <div class="field">
+                            <label>Rank *</label>
+
+                            <select id="rank" required>
+                                <option value="">Select Rank</option>
+                                <option>RFN</option>
+                                <option>AV</option>
+                                <option>LNK</option>
+                                <option>NK</option>
+                                <option>HAV</option>
+                                <option>NBSUB</option>
+                                <option>SUB</option>
+                                <option>SM</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+                            <label>Name *</label>
+                            <input type="text" id="jawanName" required>
+                        </div>
+
+
+                        <div class="field">
+                            <label>Unit *</label>
+                            <input type="text" id="unit" placeholder="Enter unit" required>
+                        </div>
+
+
+                        <div class="field full">
+                            <label>Course / Training Name *</label>
+
+                            <select id="course" required onchange="loadCourseDetails()">
+                                <option value="">Select Course</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+                            <label>Duration</label>
+                            <input type="text" id="duration" placeholder="e.g. 14 Days">
+                        </div>
+
+
+                        <div class="field">
+                            <label>Reporting Date *</label>
+                            <input type="date" id="reportingDate" required>
+                        </div>
+
+
+                        <div class="field">
+                            <label>Completion Date</label>
+                            <input type="date" id="completionDate">
+                        </div>
+
+
+                        <div class="field">
+                            <label>Remarks</label>
+                            <input type="text" id="remarks" placeholder="Enter remarks">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                       <button
+                                type="reset"
+                                class="secondary-btn"
+                                onclick="disableSubmitButton()">
+                            
+                                Clear
+                        </button>
+
+
+
+                       <button type="submit" class="primary-btn" id="submitRecordBtn" disabled>
+                             Submit Record →
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECORDS ================= -->
+
+        <section id="records" class="content-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Training Records</h2>
+                    <p>Search and monitor all training records</p>
+                </div>
+
+            </div>
+
+
+            <div class="search-panel">
+
+                <div class="search-box">
+                    🔍
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search by name, service number, rank, unit or course..."
+                        onkeyup="displayRecords()"
+                    >
+                </div>
+
+                <select id="statusFilter" onchange="displayRecords()">
+
+                    <option value="All">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Returned">Returned</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Ser</th>
+                            <th>Service No</th>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Unit</th>
+                            <th>Course</th>
+                            <th>Reporting</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recordsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= APPROVAL ================= -->
+
+        <section id="approvals" class="content-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Training Record Approval</h2>
+                    <p>Verify submitted training records</p>
+                </div>
+
+            </div>
+
+
+            <div id="approvalCards" class="approval-grid"></div>
+
+        </section>
+
+
+        <!-- ================= TRAINING MATERIAL ================= -->
+
+        <section id="material" class="content-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Training Material & Information</h2>
+                    <p>Quick access to important training resources</p>
+                </div>
+
+            </div>
+
+
+            <div class="material-grid">
+
+                <div class="material-card">
+                    <div class="material-icon">📅</div>
+                    <h3>Training Schedule</h3>
+                    <p>View upcoming training schedules and activities.</p>
+                    <button onclick="resourceMessage('Training Schedule')">
+                        Open →
+                    </button>
+                </div>
+
+
+                <div class="material-card">
+                    <div class="material-icon">📖</div>
+                    <h3>Course Details</h3>
+                    <p>Access course-related information and details.</p>
+                    <button onclick="resourceMessage('Course Details')">
+                        Open →
+                    </button>
+                </div>
+
+
+                <div class="material-card">
+                    <div class="material-icon">📚</div>
+                    <h3>Study Material</h3>
+                    <p>Training notes and study resources.</p>
+                    <button onclick="resourceMessage('Study Material')">
+                        Open →
+                    </button>
+                </div>
+
+
+                <div class="material-card">
+                    <div class="material-icon">📢</div>
+                    <h3>Important Notices</h3>
+                    <p>Important instructions and notifications.</p>
+                    <button onclick="resourceMessage('Important Notices')">
+                        Open →
+                    </button>
+                </div>
+
+
+                <div class="material-card">
+                    <div class="material-icon">📄</div>
+                    <h3>Important Documents</h3>
+                    <p>Access important Training Cell documents.</p>
+                    <button onclick="resourceMessage('Important Documents')">
+                        Open →
+                    </button>
+                </div>
+
+
+                <div class="material-card">
+                    <div class="material-icon">🔗</div>
+                    <h3>Useful Resources</h3>
+                    <p>Quick links to useful training resources.</p>
+                    <button onclick="resourceMessage('Useful Resources')">
+                        Open →
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <section id="about" class="content-section hidden">
+
+            <div class="about-card">
+
+                <div class="about-logo">
+                    ★
+                </div>
+
+                <h2>Automation of BN TRG Cell</h2>
+
+                <p>
+                    The Automation of Battalion Training Cell is a web-based
+                    application designed to streamline and digitize the
+                    day-to-day functioning of the Training Cell.
+                </p>
+
+
+                <div class="feature-list">
+
+                    <div>✓ User Login</div>
+                    <div>✓ Administrator Login</div>
+                    <div>✓ Digital Jawan Entry</div>
+                    <div>✓ Verification & Approval</div>
+                    <div>✓ Search & Filter</div>
+                    <div>✓ Status Tracking</div>
+                    <div>✓ Digital Record Management</div>
+                    <div>✓ Training Information</div>
+
+                </div>
+
+
+                <div class="tech-box">
+
+                    <h3>Technology Used</h3>
+
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>LocalStorage</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">Success</span>
+</div>
+
+
+
+
+</body>
+</html>

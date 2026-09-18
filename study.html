@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BN TRG CELL - Study Dashboard</title>
+
+    <link rel="stylesheet" href="study.css">
+
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="logo">📚</div>
+
+            <div>
+                <h1>BN TRG CELL</h1>
+                <p>Training & Study Portal</p>
+            </div>
+        </div>
+
+        <div class="user-area">
+
+            <div class="profile">
+                <div class="avatar">S</div>
+
+                <div>
+                    <strong>Study User</strong>
+                    <small>STUDY USER</small>
+                </div>
+            </div>
+
+            <button class="logout-btn"
+                    onclick="logout()">
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="welcome">
+
+            <div>
+                <p class="small-title">
+                    WELCOME TO TRAINING PORTAL
+                </p>
+
+                <h2>Study & Training Dashboard</h2>
+
+                <p>
+                    Access training material, study notes,
+                    upcoming courses and course-related PDFs.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>📚</span>
+                <div>
+                    <strong>Training</strong>
+                    <p>Material</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span>📖</span>
+                <div>
+                    <strong>Study</strong>
+                    <p>Material</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span>📅</span>
+                <div>
+                    <strong>Upcoming</strong>
+                    <p>Courses</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span>📄</span>
+                <div>
+                    <strong>Course</strong>
+                    <p>PDFs</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        LEARNING RESOURCES
+                    </span>
+
+                    <h2>Training Material</h2>
+                </div>
+
+            </div>
+
+
+            <div class="material-grid">
+
+                <div class="material-card">
+
+                    <div class="material-icon">📄</div>
+
+                    <h3>Course 01</h3>
+
+                    <p>
+                        Course syllabus, notes and
+                        training instructions.
+                    </p>
+
+                    <a href="materials/course1.pdf"
+                       target="_blank"
+                       class="download-btn">
+                        View / Download PDF
+                    </a>
+
+                </div>
+
+
+                <div class="material-card">
+
+                    <div class="material-icon">📄</div>
+
+                    <h3>Course 02</h3>
+
+                    <p>
+                        Course-related study material
+                        and reference notes.
+                    </p>
+
+                    <a href="materials/course2.pdf"
+                       target="_blank"
+                       class="download-btn">
+                        View / Download PDF
+                    </a>
+
+                </div>
+
+
+                <div class="material-card">
+
+                    <div class="material-icon">📖</div>
+
+                    <h3>Study Material</h3>
+
+                    <p>
+                        General study material and
+                        training reference documents.
+                    </p>
+
+                    <a href="materials/study-material.pdf"
+                       target="_blank"
+                       class="download-btn">
+                        View / Download PDF
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        TRAINING CALENDAR
+                    </span>
+
+                    <h2>Upcoming Courses</h2>
+                </div>
+
+            </div>
+
+
+            <div class="course-table">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>S.No</th>
+                            <th>Course</th>
+                            <th>Reporting Date</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Course 01</td>
+                            <td>05 Oct 2026</td>
+                            <td>04 Weeks</td>
+                            <td>
+                                <span class="upcoming">
+                                    Upcoming
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Course 02</td>
+                            <td>20 Oct 2026</td>
+                            <td>02 Weeks</td>
+                            <td>
+                                <span class="upcoming">
+                                    Upcoming
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Course 03</td>
+                            <td>10 Nov 2026</td>
+                            <td>04 Weeks</td>
+                            <td>
+                                <span class="upcoming">
+                                    Upcoming
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        QUICK ACCESS
+                    </span>
+
+                    <h2>Study Resources</h2>
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="materials/course1.pdf"
+                   target="_blank"
+                   class="quick-card">
+
+                    <span>📘</span>
+
+                    <div>
+                        <strong>Course Notes</strong>
+                        <small>Open course notes</small>
+                    </div>
+
+                </a>
+
+
+                <a href="materials/course2.pdf"
+                   target="_blank"
+                   class="quick-card">
+
+                    <span>📕</span>
+
+                    <div>
+                        <strong>Reference Material</strong>
+                        <small>Open reference PDF</small>
+                    </div>
+
+                </a>
+
+
+                <a href="materials/study-material.pdf"
+                   target="_blank"
+                   class="quick-card">
+
+                    <span>📗</span>
+
+                    <div>
+                        <strong>Study Material</strong>
+                        <small>Open study PDF</small>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            BN TRG CELL Training Management System
+        </p>
+
+        <p>
+            Study & Training Portal
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function logout() {
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+
+</html>
