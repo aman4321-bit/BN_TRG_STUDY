@@ -1,10 +1,18 @@
 function studyUserLogin() {
 
-    document.getElementById("username").value = "study";
+    // Clear login fields
+    document.getElementById("username").value = "";
     document.getElementById("password").value = "";
 
+    // Make STUDY USER button active
+    document.getElementById("userRole").classList.remove("active");
+    document.getElementById("adminRole").classList.remove("active");
+    document.getElementById("studyRole").classList.add("active");
+
+    // Put cursor in username
     document.getElementById("username").focus();
 }
+
 
 function login(event) {
 
