@@ -21,7 +21,7 @@ function login(event) {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    if (username === "study" && password === "1234") {
+    if (username === "study" && password === "1717") {
 
         window.location.href = "study.html";
 
